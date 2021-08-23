@@ -4,27 +4,27 @@
 
 using namespace std;
 
-void the_executor(int *a, int n1, int pos, int N)
+void executor(int *a, int minNumber, int pos, int currentSum)
 {
-    for (int i = n1; i <= N / 2; i++)
+    for (int i = minNumber; i <= currentSum / 2; i++)
     {
         a[pos] = i;
-        the_executor(a, i, pos + 1, N - i);
+        executor(a, i, pos + 1, currentSum - i);
     }
     for (int i = 0; i < pos; i++)
     {
         cout << a[i] << " + ";
     }
-    cout << N;
-    cout << endl;
+    cout << currentSum << endl;
 }
 
-void representation_of_number(int N)
+void numberRepresentation(int N)
 {
-    int arr_of_term[150] = {};
-    int first_term = 1;
+    const int maxBuffsuze = 150;
+    int arrTerm[maxBuffsuze] = {};
+    int minNumber = 1;
     int pos = 0;
-    the_executor(arr_of_term, first_term, pos, N);
+    executor(arrTerm, minNumber, pos, N);
 }
 
 int main()
@@ -32,6 +32,6 @@ int main()
     int number = 0;
     cout << "Enter your number: ";
     cin >> number;
-    representation_of_number(number);
+    numberRepresentation(number);
     return 0;
 }
