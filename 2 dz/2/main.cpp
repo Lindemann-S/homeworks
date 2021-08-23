@@ -8,8 +8,14 @@ using namespace std;
 
 double power(double a, int n)
 {
+    bool invert = false;
+    if (n < 0)
+    {
+        invert = true;
+        n = n * -1;
+    }
     double result = 1;
-    while(n > 0)
+    while (n != 0)
     {
         if (n & 1)
         {
@@ -18,18 +24,22 @@ double power(double a, int n)
         n = n >> 1;
         a *= a;
     }
+    if (invert)
+    {
+        result = 1 / result;
+    }
     return result;
 }
 
 int main()
 {
-    double the_basis_of_the_degree = 0;
+    double dergreeBasis = 0;
     cout << "enter the base of power: ";
-    cin >> the_basis_of_the_degree;
-    int the_degree_indicator = 0;
+    cin >> dergreeBasis;
+    int degreeIndicator = 0;
     cout << "enter the degree indicator: ";
-    cin >> the_degree_indicator;
-    int answer = power (the_basis_of_the_degree, the_degree_indicator);
+    cin >> degreeIndicator;
+    double answer = power(dergreeBasis, degreeIndicator);
     cout << "your answer: " << answer << endl;
     return 0;
 }
