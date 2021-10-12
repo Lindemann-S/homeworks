@@ -8,7 +8,7 @@ int gcd(int a, int b);
 void quicksort(double *row, int first, int last);
 struct Fraction
 {
-    double numerator;
-    double denominator;
+    int numerator;
+    int denominator;
     double arrValue;
 };
