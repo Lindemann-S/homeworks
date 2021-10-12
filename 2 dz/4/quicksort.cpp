@@ -1,6 +1,9 @@
-#include "functions.h"
+#include <iomanip>
 
-void quicksort(double *row, int first, int last) //функция сортировки
+#include "quicksort.h"
+
+
+void quickSort(double *row, int first, int last) //функция сортировки
 {
     if (first >= last)
     {
@@ -22,11 +25,41 @@ void quicksort(double *row, int first, int last) //функция сортиро
         }
         if (f <= l) //перестановка элементов
         {
-            swap(row[f], row[l]);
+            std::swap(row[f], row[l]);
             f++;
             l--;
         }
     }
-    quicksort(row, first, l);
-    quicksort(row, f, last);
+    quickSort(row, first, l);
+    quickSort(row, f, last);
+}
+
+void fractionQuickSort(Fraction *row, int first, int last) //функция сортировки
+{
+    if (first >= last)
+    {
+        return;
+    }
+    int f = first;
+    int l = last;
+    double mid = row[(f + l) / 2].value;
+    while (f < l)
+    {
+        while (row[f].value < mid)
+        {
+            f++;
+        }
+        while (row[l].value > mid)
+        {
+            l--;
+        }
+        if (f <= l) //перестановка элементов
+        {
+            std::swap(row[f], row[l]);
+            f++;
+            l--;
+        }
+    }
+    fractionQuickSort(row, first, l);
+    fractionQuickSort(row, f, last);
 }
