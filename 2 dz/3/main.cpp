@@ -4,16 +4,16 @@
 
 using namespace std;
 
-void executor(int *a, int minNumber, int pos, int currentSum)
+void executor(int *arr, int minNumber, int pos, int currentSum)
 {
     for (int i = minNumber; i <= currentSum / 2; i++)
     {
-        a[pos] = i;
-        executor(a, i, pos + 1, currentSum - i);
+        arr[pos] = i;
+        executor(arr, i, pos + 1, currentSum - i);
     }
     for (int i = 0; i < pos; i++)
     {
-        cout << a[i] << " + ";
+        cout << arr[i] << " + ";
     }
     cout << currentSum << endl;
 }
