@@ -1,9 +1,9 @@
 #pragma once
 
-struct MyStackNode;
+struct StackNode;
 
-void print(MyStackNode *list);
-void push(MyStackNode **plist, int d);
-int pop(MyStackNode **plist);
-bool is_empty(MyStackNode *list);
-char top(MyStackNode *list);
+void print(StackNode *list);
+void push(StackNode *&plist, int d);
+int pop(StackNode *&plist);
+bool is_empty(StackNode *list);
+char top(StackNode *list);

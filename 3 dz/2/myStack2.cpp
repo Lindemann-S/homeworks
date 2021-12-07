@@ -2,44 +2,45 @@
 #include <cstdlib>
 #include "myStack2.h"
 
-struct MyStackNode
+
+struct StackNode
 {
     char data;
-    MyStackNode *next;
+    StackNode *next;
 };
 
-void print(MyStackNode *list)
+void print(StackNode *list)
 {
-    for (MyStackNode *p = list; p != nullptr; p = p->next)
+    for (StackNode *p = list; p != nullptr; p = p->next)
     {
         printf("%d ", p->data);
     }
     printf("\n");
 }
 
-void push(MyStackNode **plist, int d)
+void push(StackNode *&plist, int d)
 {
-    MyStackNode *p = new MyStackNode;
+    StackNode *p = new StackNode;
     p->data = d;
-    p->next = *plist;
-    *plist = p;
+    p->next = plist;
+    plist = p;
 }
 
-int pop(MyStackNode **plist)
+int pop(StackNode *&plist)
 {
-    MyStackNode *p = *plist;
+    StackNode *p = plist;
     char result = p->data;
-    *plist = p->next;
+    plist = p->next;
     delete(p);
     return result;
 }
 
-bool is_empty(MyStackNode *list)
+bool is_empty(StackNode *list)
 {
     return list == nullptr;
 }
 
-char top(MyStackNode *list)
+char top(StackNode *list)
 {
     return list->data;
 }
