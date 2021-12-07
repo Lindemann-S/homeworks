@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
-#include "myIntStack2.h"
+#include "IntStack2.h"
 
 
 int stringLenght(char *string);
-void calculate(MyStackNode **operands, char sign, bool *errorFlag);
+void calculate(StackNode *&operands, char sign, bool &errorFlag);
 int solution(char *inputExpression);

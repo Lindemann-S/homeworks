@@ -11,10 +11,10 @@ int stringLenght(char *string)
     return lenght;
 }
 
-void calculate(MyStackNode **operands, char sign, bool *errorFlag)
+void calculate(StackNode *&operands, char sign, bool &errorFlag)
 {
-    int secondValue = pop(&*operands);
-    int firstValue = pop(&*operands);
+    int secondValue = pop(operands);
+    int firstValue = pop(operands);
     int result = 0;
     if (sign == '+')
     {
@@ -37,16 +37,16 @@ void calculate(MyStackNode **operands, char sign, bool *errorFlag)
         else
         {
             printf("%s\n", "Error: division by 0");
-            *errorFlag = true;
+            errorFlag = true;
             return;
         }
     }
-    push(&*operands, result);
+    push(operands, result);
 }
 
 int solution(char *inputExpression)
 {
-    MyStackNode *operands = nullptr;
+    StackNode *operands = nullptr;
     bool lastIsDigit = false;
     int value = 0;
     int secondValue = 0;
@@ -61,19 +61,19 @@ int solution(char *inputExpression)
         if (inputExpression[i] >= 48 && inputExpression[i] <= 57 && lastIsDigit == true)
         {
             value = inputExpression[i] - '0';
-            secondValue = pop(&operands);
+            secondValue = pop(operands);
             value = secondValue * 10 + value;
-            push(&operands, value);
+            push(operands, value);
         }
         if (inputExpression[i] >= 48 && inputExpression[i] <= 57 && lastIsDigit == false)
         {
             value = inputExpression[i] - '0';
-            push(&operands, value);
+            push(operands, value);
             lastIsDigit = true;
         }
         if (inputExpression[i] == '+' || inputExpression[i] == '-' || inputExpression[i] == '*' || inputExpression[i] == '/')
         {
-            calculate(&operands, inputExpression[i], &errorFlAG);
+            calculate(operands, inputExpression[i], errorFlAG);
             lastIsDigit = false;
             if (errorFlAG)
             {
@@ -81,5 +81,5 @@ int solution(char *inputExpression)
             }
         }
     }
-    return pop(&operands);
+    return pop(operands);
 }
