@@ -20,11 +20,11 @@ char *postfix(char *inputString)
     int i = 0;
     int k = 0;
     bool lastIsDigit = false;
-    MyCharStackNode *stack = nullptr;
+    CharStackNode *stack = nullptr;
     char *postfixString = new char[100];
     while (inputString[i] != '\0')
     {
-        if ((inputString[i] < 48 || inputString[i] > 57) && lastIsDigit == true)
+        if ((inputString[i] <= 48 || inputString[i] >= 57) && lastIsDigit == true)
         {
             postfixString[k] = ' ';
             k++;
@@ -47,15 +47,15 @@ char *postfix(char *inputString)
         {
             if (is_empty(stack))
             {
-                push(&stack, inputString[i]);
+                push(stack, inputString[i]);
             }
             else if (top(stack) == '(')
             {
-                push(&stack, inputString[i]);
+                push(stack, inputString[i]);
             }
             else if (prior(inputString[i]) > prior(top(stack)))
             {
-                push(&stack, inputString[i]);
+                push(stack, inputString[i]);
             }
             else
             {
@@ -65,14 +65,14 @@ char *postfix(char *inputString)
                     k++;
                     postfixString[k] = ' ';
                     k++;
-                    pop(&stack);
+                    pop(stack);
                 }
-                push(&stack, inputString[i]);
+                push(stack, inputString[i]);
             }
         }
         if (inputString[i] == '(')
         {
-            push(&stack, inputString[i]);
+            push(stack, inputString[i]);
         }
         if (inputString[i] == ')')
         {
@@ -82,9 +82,9 @@ char *postfix(char *inputString)
                 k++;
                 postfixString[k] = ' ';
                 k++;
-                pop(&stack);
+                pop(stack);
             }
-            pop(&stack);
+            pop(stack);
         }
         i++;
     }
@@ -99,8 +99,9 @@ char *postfix(char *inputString)
         k++;
         postfixString[k] = ' ';
         k++;
-        pop(&stack);
+        pop(stack);
     }
+    deleteStack(stack);
     return postfixString;
     delete []postfixString;
 }
