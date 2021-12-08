@@ -3,33 +3,36 @@
 
 void heapMaker(int *arr, int n, int i)
 {
-    int largest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
-    if (left < n && arr[left] > arr[largest])
+    while (2 * i + 1 < n)
     {
-        largest  = left;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        if (right < n && arr[right] >= arr[left])
+        {
+            left = right;
+        }
+        if (arr[i] < arr[left])
+        {
+            std::swap(arr[i], arr[left]);
+            i = left;
+        }
+        else
+        {
+            break;
+        }
     }
-    if (right < n && arr[right] > arr[largest])
-    {
-        largest = right;
-    }
-    if (largest != i)
-    {
-        std::swap(arr[i], arr[largest]);
-        heapMaker(arr, n, largest);
-    } 
 }
 
-void heapSort(int *row, int n)
+void heapSort(int *row, int lenght)
 {
-    for (int i = n / 2 - 1; i >= 0; i--)
+    for (int i = lenght / 2 - 1; i >= 0; i--)
     {
-        heapMaker(row, n, i);
+        heapMaker(row, lenght, i);
     }
-    for (int i = n - 1; i >= 0; i--)
+    while (lenght > 0)
     {
-        std::swap(row[0], row[i]);
-        heapMaker(row, i, 0);
+        std::swap(row[0], row[lenght - 1]);
+        lenght--;
+        heapMaker(row, lenght, 0);
     }
 }
